@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicinal plants of East Africa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-link active">Gallery</a>
+        <a href="overview.html" class="nav-link">Overview</a>
+        <a href="introduction.html" class="nav-link">Introduction</a>
+        <a href="remedies.html" class="nav-link">Remedies</a>
+        <a href="directory.html" class="nav-link">Directory</a>
+    </nav>
+
+    <h1>Medicinal Plants Directory</h1>
+
+    <div class="intro-section">
+        <h2>Medicinal Plants of East Africa</h2>
+        <p><strong>Discover, learn, and document the medicinal plants of East Africa.</strong></p>
+        <p>This app is a digital resource for exploring medicinal plants found across East Africa, including their local names, botanical identification, traditional uses, distribution, plant parts used, and relevant scientific information.</p>
+        <p>Designed for <strong>students, researchers, farmers, herbal practitioners, conservationists, and the general public</strong>, the platform brings traditional knowledge and modern botanical information together in one accessible place.</p>
+        <p class="tagline"><em>Explore plants. Preserve knowledge. Support research.</em></p>
+    </div>
+
+    <div class="author-section">
+        <h2>About the Author</h2>
+        <div class="author-content">
+            <img src="simon Vudiya.jpeg" alt="Simon Vudiya" class="author-photo">
+            <div class="author-text">
+                <h3>Simon Vudiya</h3>
+                <p>Simon Vudiya is an agricultural researcher and plant health professional with a background in horticulture and plant pathology. His interests span <strong>plant health, agricultural research, data analysis, GIS, and technology for agriculture</strong>. Through this medicinal plants project, he aims to contribute to the documentation, preservation, and accessible sharing of knowledge about East Africa's diverse medicinal plant resources.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- The container where all the plants will be loaded -->
+    <div class="gallery-container" id="gallery"></div>
+
+    <script>
+        // 1. Your list of plant names (Removed the duplicate Albizia gummifera)
+        const plantList = [
+            "Achiranthes aspera",
+            "Acmella caulirhiza",
+            "Aeschynomene schimperi",
+            "ageratum_conyzoides_conyzoides",
+            "ajuga reptans",
+            "AjugaIntegrifolia",
+            "Albizia gummifera",
+            "bidens_pilosa",
+            "cissus quadrangularis",
+            "crotalaria spinosa",
+            "crotolaria brevidens",
+            "croton dichogamous",
+            "cyperus papyrus",
+            "dichrostachys cinerea",
+            "emilia coccinea",
+            "eucalyptus ceriodola",
+            "Ficus sycomorus",
+            "galinsoga parviflora",
+            "gloriosa superba",
+            "Guizotia scabra",
+            "ipomea hildebrandtii",
+            "ipomea jaegeri",
+            "ipomea wightii",
+            "Justicia flava",
+            "lantana trifolia",
+            "Launaea cornuta",
+            "leonotis mollissima",
+            "leonotis nepetifolia",
+            "markhamia lutea",
+            "Mormodica foetida",
+            "oxalis corniculata",
+            "oxygonum sinuatum",
+            "phoenix reclinate",
+            "pistia stratiotes",
+            "plantago major",
+            "plectranthus barbatus",
+            "plectranthus linuginous",
+            "rumex species",
+            "senna didymoborya",
+            "sida tenuicarpa",
+            "solanum coagulans",
+            "spathodea campanulate",
+            "trema orientalis",
+            "Vinca_(Catharanthus_roseus)",
+            "warbugia ugandensis_abaki",
+            "azadirachta indica"
+        ];
+
+        // Common image extensions to try
+        const extensions = ['.jpg', '.jpeg', '.png', '.JPG', '.JPEG', '.PNG', '.jfif', '.JFIF', '.webp', '.WEBP', '.avif', '.AVIF'];
+        const baseImagePath = 'medicinal plants/'; // Folder where images are stored
+
+        // Function to format the name (e.g., "bidens_pilosa" -> "Bidens Pilosa")
+        function formatName(name) {
+            return name.replace(/_/g, ' ')
+                       .replace(/\b\w/g, char => char.toUpperCase());
+        }
+
+        // Function to create a single card
+        function createPlantCard(plantName) {
+            const card = document.createElement('div');
+            card.className = 'plant-card';
+
+            const img = document.createElement('img');
+            let extIndex = 0;
+            
+            // Try to load the image with the first extension
+            img.src = baseImagePath + plantName + extensions[extIndex];
+            img.alt = formatName(plantName);
+            
+            // If image fails to load, try the next extension
+            img.onerror = function() {
+                extIndex++;
+                if (extIndex < extensions.length) {
+                    img.src = baseImagePath + plantName + extensions[extIndex];
+                } else {
+                    // If no image format works, show a generic placeholder
+                    img.src = 'https://via.placeholder.com/200x200?text=Image+Not+Found';
+                    img.onerror = null; // Prevent infinite loop
+                }
+            };
+
+            const nameLabel = document.createElement('p');
+            nameLabel.className = 'plant-name';
+            nameLabel.textContent = formatName(plantName);
+
+            card.appendChild(img);
+            card.appendChild(nameLabel);
+            
+            return card;
+        }
+
+        // Function to render all plants
+        function renderGallery() {
+            const gallery = document.getElementById('gallery');
+            
+            // Remove duplicates from the list just in case
+            const uniquePlants = [...new Set(plantList)];
+
+            uniquePlants.forEach(plant => {
+                const card = createPlantCard(plant);
+                gallery.appendChild(card);
+            });
+        }
+
+        // Run the gallery rendering when the page loads
+        window.onload = renderGallery;
+    </script>
+</body>
+</html>

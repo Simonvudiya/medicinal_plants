@@ -1,0 +1,437 @@
+/* =========================================
+   UNIFIED THEME FOR TRADITIONAL MEDICINE
+   ========================================= */
+
+:root {
+    --primary-color: #2c3e50;   /* Slate Blue - for headings */
+    --accent-color: #27ae60;    /* Emerald Green - for highlights */
+    --text-color: #333333;      /* Dark Grey - for body text */
+    --bg-color: #f4f7f6;        /* Soft Grey-Green - page background */
+    --paper-color: #ffffff;     /* White - card background */
+    --border-color: #e0e0e0;    /* Light Grey - dividers */
+    --font-main: 'Georgia', 'Times New Roman', serif;
+    --font-heading: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.8;
+    margin: 0;
+    padding: 40px 20px;
+}
+
+/* --- Layout --- */
+.container {
+    max-width: 850px;
+    margin: 0 auto;
+    background-color: var(--paper-color);
+    padding: 50px 60px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+}
+
+/* --- Header --- */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 20px;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: 2.2em;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    font-style: italic;
+    color: #666;
+    margin-top: 0;
+}
+
+/* --- Typography --- */
+h2 {
+    font-family: var(--font-heading);
+    font-size: 1.5em;
+    color: var(--primary-color);
+    margin-top: 45px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2em;
+    color: var(--accent-color);
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+h4 {
+    font-family: var(--font-heading);
+    font-size: 1.1em;
+    color: var(--primary-color);
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 20px;
+    text-align: justify;
+    font-size: 1.05em;
+}
+
+ul, ol {
+    margin-bottom: 20px;
+    padding-left: 25px;
+}
+
+li {
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+/* --- Special Boxes --- */
+.toc {
+    background-color: #f4f8f4;
+    padding: 20px 30px;
+    border-left: 4px solid var(--accent-color);
+    border-radius: 4px;
+    margin-bottom: 40px;
+}
+
+.toc h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.2em;
+}
+
+.toc ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.toc a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.toc a:hover {
+    color: #1e8449;
+    text-decoration: underline;
+}
+
+.definition-box {
+    background-color: #f9f9f9;
+    border-left: 4px solid var(--primary-color);
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 600px) {
+    .container {
+        padding: 30px 20px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    body {
+        padding: 15px 10px;
+    }
+}
+
+/* --- Navigation Bar --- */
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    padding: 10px 22px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    font-family: var(--font-heading);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-link:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.nav-link.active {
+    background-color: var(--accent-color);
+}
+
+/* --- Gallery (index.html) --- */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Intro section on gallery page --- */
+.intro-section {
+    max-width: 1200px;
+    margin: 0 auto 30px;
+    padding: 25px 30px;
+    background: var(--paper-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border-left: 5px solid var(--accent-color);
+}
+
+.intro-section h2 {
+    margin-top: 0;
+    font-size: 1.6em;
+    color: var(--primary-color);
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.intro-section p {
+    margin-bottom: 12px;
+    font-size: 1.05em;
+    color: var(--text-color);
+}
+
+.intro-section .tagline {
+    font-style: italic;
+    color: var(--accent-color);
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+/* --- Author section on gallery page --- */
+.author-section {
+    max-width: 1200px;
+    margin: 0 auto 30px;
+    padding: 25px 30px;
+    background: var(--paper-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border-left: 5px solid var(--accent-color);
+}
+
+.author-section h2 {
+    margin-top: 0;
+    font-size: 1.6em;
+    color: var(--primary-color);
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.author-content {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.author-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--accent-color);
+    flex-shrink: 0;
+}
+
+.author-text h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.3em;
+}
+
+.author-text p {
+    margin-bottom: 0;
+    font-size: 1.05em;
+    color: var(--text-color);
+}
+
+.plant-card {
+    background-color: var(--paper-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.plant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.plant-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background-color: #e0e0e0;
+    display: block;
+}
+
+.plant-name {
+    padding: 15px;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--primary-color);
+    text-transform: capitalize;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Directory page controls --- */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+    background: var(--paper-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.search-box {
+    flex-grow: 1;
+    min-width: 250px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-box input:focus {
+    border-color: var(--accent-color);
+}
+
+.sort-box select {
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+}
+
+.sort-box select:focus {
+    border-color: var(--accent-color);
+}
+
+.results-count {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: var(--primary-color);
+    padding: 0 10px;
+}
+
+/* --- Directory results grid --- */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: var(--paper-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px  6px rgba(0,0,0,0.05);
+    border-left: 5px solid var(--accent);
+    display: flex;
+    flex-direction: column;
+}
+
+.disease-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+}
+
+.plant-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.plant-tag {
+    background-color: #e8f5e9;
+    color: #1e8449;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-style: italic;
+    display: inline-block;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2rem;
+    color: #888;
+    background: white;
+    border-radius: 8px;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 600px) {
+    .container {
+        padding: 30px 20px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    body {
+        padding: 15px 10px;
+    }
+    .controls {
+        flex-direction: column;
+    }
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+}
