@@ -4,24 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>East African Medicinal Plants - Compound Query</title>
+    <link rel="stylesheet" href="style.css">
+
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --accent-color: #3498db;
-            --bg-color: #f8f9fa;
-            --table-header-bg: #ecf0f1;
-            --border-color: #ddd;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: var(--bg-color);
-            color: var(--primary-color);
-        }
-
+        /* Compounds page specific overrides using shared theme variables */
         header {
             text-align: center;
             margin-bottom: 30px;
@@ -36,106 +22,28 @@
 
         header p {
             margin: 5px 0;
-            color: var(--secondary-color);
+            color: var(--text-color);
             font-size: 0.95em;
-        }
-
-        .filters {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-
-        .filters input, .filters select, .filters button {
-            padding: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: inherit;
-        }
-
-        .filters input:focus, .filters select:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
-        }
-
-        .filters button {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-
-        .filters button:hover {
-            background-color: #2980b9;
         }
 
         #resultCount {
             margin-bottom: 10px;
             font-weight: bold;
-            color: var(--secondary-color);
-        }
-
-        .table-container {
-            overflow-x: auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        th {
-            background-color: var(--table-header-bg);
             color: var(--primary-color);
-            font-weight: 600;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+        }
+
+        .filters input:focus, .filters select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 5px rgba(39, 174, 96, 0.3);
+        }
+
+        .filters button:hover {
+            background-color: #1e8449;
         }
 
         tr:hover {
             background-color: #f1f8ff;
-        }
-
-        .novelty-badge {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: bold;
-            background-color: #e0e0e0;
-            color: #333;
-        }
-        
-        .novelty-Y { background-color: #d4edda; color: #155724; }
-        .novelty-N { background-color: #f8d7da; color: #721c24; }
-        .novelty-O { background-color: #fff3cd; color: #856404; }
-        .novelty-R { background-color: #cce5ff; color: #004085; }
-        .novelty-n { background-color: #e2e3e5; color: #383d41; }
-
-        @media (max-width: 768px) {
-            .filters {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
