@@ -155,18 +155,44 @@
                 🌿 Medicinal Plants Chatbot
                 <button class="chat-close" onclick="toggleChat()">&times;</button>
             </div>
-            <iframe id="chatIframe" src="about:blank" class="chat-iframe" title="Chatbot" frameborder="0" allow="clipboard-write; camera; microphone; geolocation; encrypted-media" allowfullscreen loading="lazy"></iframe>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-bot">Hello! I can help you find information about East African medicinal plants, their traditional uses, chemical compounds, and more. What would you like to know?</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Ask about a plant, disease, compound, or use..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+                <button onclick="sendChatMessage()">Send</button>
+            </div>
         </div>
     </div>
 
+    <script src="chatbot_data.js"></script>
     <script>
         function toggleChat() {
-            const win = document.getElementById('chatWindow');
-            win.classList.toggle('active');
-            if (win.classList.contains('active')) {
-                const iframe = document.getElementById('chatIframe');
-                iframe.src = 'https://simonvudiya-medai-app-z86fzh.streamlit.app/';
-            }
+            document.getElementById('chatWindow').classList.toggle('active');
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const query = input.value.trim();
+            if (!query) return;
+
+            const messages = document.getElementById('chatMessages');
+
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-user';
+            userMsg.textContent = query;
+            messages.appendChild(userMsg);
+
+            // Add bot response
+            const botMsg = document.createElement('div');
+            botMsg.className = 'chat-bot';
+            botMsg.innerHTML = chatbotFormat(chatbotSearch(query), query);
+            messages.appendChild(botMsg);
+
+            // Clear input and scroll
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
         }
     </script>
 </body>
