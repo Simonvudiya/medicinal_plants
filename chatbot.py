@@ -2,12 +2,21 @@ import streamlit as st
 import json
 import os
 
-# Prevent redirect loop when embedded in iframe
+# Prevent redirect loop - critical for iframe embedding
 st.markdown("""
+    <meta http-equiv="Content-Security-Policy" content="frame-ancestors *">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-        // Prevent Streamlit's automatic redirect when in iframe
-        if (window.parent !== window) {
-            window.history.replaceState(null, '', window.location.href);
+        // Prevent Streamlit's automatic redirect loop
+        if (window.top !== window) {
+            // We are in an iframe - prevent redirects
+            const originalReplace = window.location.replace;
+            window.location.replace = function(url) {
+                if (url && url.indexOf('streamlit') !== -1) {
+                    return;
+                }
+                return originalReplace.call(this, url);
+            };
         }
     </script>
     <style>
@@ -15,6 +24,7 @@ st.markdown("""
         header[data-testid="stHeader"] { display: none; }
         .stDeployButton { display: none; }
         div[data-testid="stStatusWidget"] { display: none; }
+        .block-container { padding-top: 0 !important; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -29,14 +39,6 @@ def load_data():
     return data
 
 data = load_data()
-
-# Hide default Streamlit elements for iframe mode
-st.markdown("""
-    <style>
-        #root > div[data-testid="stApp"] > div[data-testid="stToolbar"] { display: none; }
-        div[data-testid="stStatusWidget"] { display: none; }
-    </style>
-""", unsafe_allow_html=True)
 
 # Title (compact for iframe)
 st.title("🌿 Medicinal Plants Chatbot")
@@ -55,12 +57,10 @@ for message in st.session_state.messages:
 
 # Chat input
 if prompt := st.chat_input("Ask about a plant, disease, compound, or use..."):
-    # Add user message
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Generate response
     with st.chat_message("assistant"):
         with st.spinner("Searching..."):
             response = search_plants(prompt, data)
@@ -73,13 +73,11 @@ def search_plants(query, data):
     query_lower = query.lower()
     results = []
     
-    # Search medicinal plant list
     if 'medicinal_plant.json' in data:
         for plant in data['medicinal_plant.json']:
             if query_lower in plant.lower():
                 results.append(f"🌱 **{plant}** - Found in medicinal plant database")
     
-    # Search disease data
     if 'disease_plants.json' in data:
         for item in data['disease_plants.json']:
             if query_lower in item['disease'].lower():
@@ -89,7 +87,6 @@ def search_plants(query, data):
                 if query_lower in plant.lower():
                     results.append(f"🌿 {plant} is used to treat {item['disease']}")
     
-    # Search vernacular names
     if 'vernacular_data.json' in data:
         for item in data['vernacular_data.json']:
             if (query_lower in item['vernacular_name'].lower() or 
@@ -97,7 +94,6 @@ def search_plants(query, data):
                 query_lower in item['language_tribe'].lower()):
                 results.append(f"🗣️ {item['vernacular_name']} ({item['language_tribe']}) = {item['botanical_equivalent']}")
     
-    # Search compounds
     if 'present_compounds.txt' in data:
         compounds = data['present_compounds.txt'].get('compounds', [])
         for c in compounds:
@@ -111,7 +107,6 @@ def search_plants(query, data):
                 "vernacular name, language, family, or molecular formula. "
                 "Examples: 'Croton megalocarpus', 'diabetes', 'Luo', 'Rutaceae', or 'C18H32O4'")
     
-    # Deduplicate and limit
     unique_results = list(dict.fromkeys(results))[:10]
     
     response = f"Found {len(unique_results)} result(s) for '{query}':\n\n"
