@@ -2,13 +2,19 @@ import streamlit as st
 import json
 import os
 
-# Configure for iframe embedding
+# Prevent redirect loop when embedded in iframe
 st.markdown("""
-    <meta http-equiv="Content-Security-Policy" content="frame-ancestors *">
+    <script>
+        // Prevent Streamlit's automatic redirect when in iframe
+        if (window.parent !== window) {
+            window.history.replaceState(null, '', window.location.href);
+        }
+    </script>
     <style>
         .stApp { margin: 0; padding: 0; }
         header[data-testid="stHeader"] { display: none; }
         .stDeployButton { display: none; }
+        div[data-testid="stStatusWidget"] { display: none; }
     </style>
 """, unsafe_allow_html=True)
 
