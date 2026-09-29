@@ -2,29 +2,22 @@ import streamlit as st
 import json
 import os
 
-# Prevent redirect loop - critical for iframe embedding
+# Page config - must be first Streamlit call
+st.set_page_config(
+    page_title="Medicinal Plants Chatbot",
+    page_icon="🌿",
+    layout="centered",
+    initial_sidebar_state="collapsed"
+)
+
+# Hide Streamlit branding for clean embed
 st.markdown("""
-    <meta http-equiv="Content-Security-Policy" content="frame-ancestors *">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        // Prevent Streamlit's automatic redirect loop
-        if (window.top !== window) {
-            // We are in an iframe - prevent redirects
-            const originalReplace = window.location.replace;
-            window.location.replace = function(url) {
-                if (url && url.indexOf('streamlit') !== -1) {
-                    return;
-                }
-                return originalReplace.call(this, url);
-            };
-        }
-    </script>
     <style>
+        #root > div[data-testid="stApp"] > div[data-testid="stToolbar"] { display: none; }
+        div[data-testid="stStatusWidget"] { display: none; }
         .stApp { margin: 0; padding: 0; }
         header[data-testid="stHeader"] { display: none; }
         .stDeployButton { display: none; }
-        div[data-testid="stStatusWidget"] { display: none; }
-        .block-container { padding-top: 0 !important; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -40,7 +33,7 @@ def load_data():
 
 data = load_data()
 
-# Title (compact for iframe)
+# Title
 st.title("🌿 Medicinal Plants Chatbot")
 st.markdown("---")
 

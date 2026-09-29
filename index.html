@@ -167,13 +167,19 @@
                 🌿 Medicinal Plants Chatbot
                 <button class="chat-close" onclick="toggleChat()">&times;</button>
             </div>
-            <iframe src="https://share.streamlit.io/simonvudiya/medicinal_plants_app/chatbot.py" class="chat-iframe" title="Chatbot" frameborder="0" allow="clipboard-write; camera; microphone; geolocation; encrypted-media" allowfullscreen></iframe>
+            <iframe id="chatIframe" src="about:blank" class="chat-iframe" title="Chatbot" frameborder="0" allow="clipboard-write; camera; microphone; geolocation; encrypted-media" allowfullscreen loading="lazy"></iframe>
         </div>
     </div>
 
     <script>
         function toggleChat() {
-            document.getElementById('chatWindow').classList.toggle('active');
+            const win = document.getElementById('chatWindow');
+            win.classList.toggle('active');
+            if (win.classList.contains('active')) {
+                const iframe = document.getElementById('chatIframe');
+                // Try direct app URL first
+                iframe.src = 'https://simonvudiya-medai-app-z86fzh.streamlit.app/';
+            }
         }
     </script>
 </body>
