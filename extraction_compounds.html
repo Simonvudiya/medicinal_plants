@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Extracting Compounds from Medicinal Plants: A Practical Guide</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#eef2ee;--surface:#fbfcfb;--ink:#17261f;--muted:#55665d;--line:#cbd6cf;--accent:#1f6b52;--accent-soft:#dcebe3;--warn:#8a5a00;--warn-soft:#f6ecd2;--red:#9b2c2c;--red-soft:#f8e1e1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a16;--surface:#18241f;--ink:#e6efe9;--muted:#9fb2a8;--line:#2d4038;--accent:#6fcba5;--accent-soft:#1d3a2f;--warn:#e8c46a;--warn-soft:#3a3118;--red:#f0a0a0;--red-soft:#3d2020}}
+:root[data-theme="dark"]{--bg:#111a16;--surface:#18241f;--ink:#e6efe9;--muted:#9fb2a8;--line:#2d4038;--accent:#6fcba5;--accent-soft:#1d3a2f;--warn:#e8c46a;--warn-soft:#3a3118;--red:#f0a0a0;--red-soft:#3d2020}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 52px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 34px;border-bottom:3px solid var(--accent)}
+h1{font:700 clamp(1.9rem,5vw,3rem)/1.12 "Source Serif 4",Georgia,serif;margin:0 0 14px;max-width:22ch}
+header p{color:var(--muted);max-width:64ch;margin:0}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+nav .wrap{display:flex;gap:2px;overflow-x:auto;padding-top:6px;padding-bottom:6px}
+nav a{white-space:nowrap;color:var(--muted);text-decoration:none;padding:6px 11px;border-radius:4px;font-size:.9rem}
+nav a:hover,nav a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
+section{padding:42px 0 6px}
+h2{font:700 1.7rem/1.2 "Source Serif 4",Georgia,serif;margin:0 0 6px}
+h3{font:600 1.15rem/1.3 "Source Serif 4",Georgia,serif;margin:0 0 6px}
+.lede{color:var(--muted);margin:0 0 20px;max-width:70ch}
+p{margin:.5em 0}
+.panel{background:var(--surface);border:1px solid var(--line);padding:16px 20px;margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.grid .panel{margin:0}
+.flow{display:flex;flex-direction:column;gap:0;margin:0 0 20px;padding:0;list-style:none;counter-reset:s}
+.flow li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);padding:9px 14px;margin-bottom:-1px;font-size:.95rem}
+.flow li::before{content:counter(s) ". ";font-weight:600;color:var(--accent)}
+.flow li span{color:var(--muted)}
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--surface);margin:0 0 16px}
+table{border-collapse:collapse;width:100%;min-width:540px;font-size:.92rem}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--accent-soft);font-weight:600}
+tr:last-child td{border-bottom:0}
+ul,ol{padding-left:1.2em;margin:.4em 0}
+li{margin:.2em 0}
+.note,.warn{font-size:.92rem;padding:10px 14px;margin:14px 0;border-left:4px solid var(--warn);background:var(--warn-soft)}
+.warn{border-color:var(--red);background:var(--red-soft)}
+.note b,.warn b{display:block}
+.eq{font-family:"IBM Plex Sans",sans-serif;background:var(--accent-soft);padding:10px 14px;margin:10px 0;font-weight:500}
+.scale{display:flex;justify-content:space-between;gap:4px;background:linear-gradient(90deg,var(--accent-soft),var(--surface));border:1px solid var(--line);padding:10px;font-size:.82rem;margin:10px 0 16px;overflow-x:auto}
+.scale span{white-space:nowrap;padding:0 6px}
+em.sp{font-style:italic}
+footer{margin-top:44px;padding:20px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+@media (max-width:560px){header{padding-top:36px}.wrap{padding:0 14px}}
+</style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-link">Gallery</a>
+        <a href="overview.html" class="nav-link">Overview</a>
+        <a href="introduction.html" class="nav-link">Introduction</a>
+        <a href="remedies.html" class="nav-link">Remedies</a>
+        <a href="directory.html" class="nav-link">Directory</a>
+        <a href="inform_data.html" class="nav-link">Data</a>
+        <a href="compunds.html" class="nav-link">Compounds</a>
+        <a href="natural_product_screening.html" class="nav-link">Screening</a>
+        <a href="extraction_compounds.html" class="nav-link active">Extraction</a>
+    </nav>
+
+<header><div class="wrap">
+<h1>Extracting compounds from medicinal plants</h1>
+<p>A practical guide to the full workflow: from collecting the plant to isolating and identifying a pure compound. It explains what the silica gel, TLC plates and solvents on a typical procurement list are for and how they fit together.</p>
+</div></header>
+
+<nav aria-label="Sections"><div class="wrap">
+<a href="#overview">Overview</a><a href="#prep">Plant preparation</a><a href="#solvents">Solvents</a><a href="#extraction">Extraction</a><a href="#fractionation">Fractionation</a><a href="#tlc">TLC</a><a href="#column">Column</a><a href="#purify">Purification</a><a href="#id">Identification</a><a href="#classes">By compound class</a><a href="#safety">Safety</a><a href="#trouble">Troubleshooting</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="overview">
+<h2>Overview of the workflow</h2>
+<p class="lede">A crude plant extract holds dozens to hundreds of compounds. The goal is to separate them step by step, using differences in polarity, until single compounds can be tested and identified.</p>
+<ol class="flow">
+<li><b>Collect and authenticate</b> <span>the plant, record voucher details</span></li>
+<li><b>Dry and grind</b> <span>stabilise and increase surface area</span></li>
+<li><b>Extract</b> <span>move compounds into a solvent to give a crude extract</span></li>
+<li><b>Fractionate</b> <span>split the crude extract by polarity</span></li>
+<li><b>TLC</b> <span>see how many compounds there are and find a solvent system</span></li>
+<li><b>Column chromatography</b> <span>separate the fraction on silica</span></li>
+<li><b>TLC monitoring</b> <span>combine fractions with matching patterns</span></li>
+<li><b>Final purification</b> <span>Sephadex, preparative TLC, HPLC, recrystallisation</span></li>
+<li><b>Identify</b> <span>NMR, MS, UV, FTIR</span></li>
+</ol>
+<div class="note"><b>Bioassay-guided isolation</b>For medicinal work, each extract or fraction is usually tested in a biological assay (antibacterial, antioxidant, cytotoxicity and so on). Only the active fractions are carried forward, so effort is spent on compounds that matter.</div>
+</section>
+
+<section id="prep">
+<h2>1. Plant selection and preparation</h2>
+<div class="grid">
+<div class="panel">
+<h3>Selection and authentication</h3>
+<ul>
+<li>Choose plants from ethnobotanical use, literature or previous screening hits.</li>
+<li>Have a botanist identify the species. Deposit a voucher specimen in a herbarium and record the voucher number.</li>
+<li>Record collection date, place (GPS), plant part, season and growth stage. Chemistry varies with all of these.</li>
+<li>Obtain collection permits and follow access and benefit-sharing rules (for example under the Nagoya Protocol) before collecting.</li>
+</ul>
+</div>
+<div class="panel">
+<h3>Drying</h3>
+<ul>
+<li>Dry in shade with good airflow, or in an oven at 30–40 °C. Strong sun and high heat can destroy sensitive compounds.</li>
+<li>Spread material thinly and turn it. It is dry when it snaps or crumbles.</li>
+<li>For very heat-labile or volatile compounds, freeze-dry or extract fresh material.</li>
+</ul>
+</div>
+<div class="panel">
+<h3>Grinding and storage</h3>
+<ul>
+<li>Grind to a coarse-to-medium powder. Too fine clogs filters and columns; too coarse extracts poorly.</li>
+<li>Weigh the powder, because yields are reported as % of dry weight.</li>
+<li>Store in labelled, airtight containers, away from light and moisture.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section id="solvents">
+<h2>2. Solvents and polarity</h2>
+<p class="lede">Plant compounds differ widely in polarity, so a range of solvents is used. The principle is "like dissolves like".</p>
+<div class="scale"><span>Non-polar</span><span>Petroleum ether</span><span>Hexane</span><span>Diethyl ether</span><span>DCM</span><span>Chloroform</span><span>Ethyl acetate</span><span>Methanol</span><span>Polar</span></div>
+<div class="scroll"><table>
+<thead><tr><th>Solvent</th><th>Polarity</th><th>Typically dissolves</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Petroleum ether / hexane</td><td>Very low</td><td>Fats, waxes, sterols, essential oils, non-polar terpenes</td><td>Used first to defat. Flammable; hexane is neurotoxic on chronic exposure.</td></tr>
+<tr><td>Diethyl ether</td><td>Low</td><td>Lipophilic compounds</td><td>Extremely flammable; forms explosive peroxides on storage.</td></tr>
+<tr><td>Dichloromethane (DCM)</td><td>Low–medium</td><td>Many terpenoids, alkaloids (free bases), moderately non-polar compounds</td><td>Volatile. Use in a fume hood.</td></tr>
+<tr><td>Chloroform</td><td>Medium</td><td>Alkaloids, terpenoids, some flavonoid aglycones</td><td>Toxic and suspected carcinogen. Substitute with DCM where possible.</td></tr>
+<tr><td>Ethyl acetate</td><td>Medium</td><td>Phenolics, flavonoid aglycones, many coumarins</td><td>Common and relatively safer partitioning solvent.</td></tr>
+<tr><td>Methanol</td><td>High</td><td>Glycosides, flavonoids, tannins, polar alkaloids, broad range</td><td>Toxic. Best general solvent for a broad crude extract.</td></tr>
+<tr><td>Ethanol, water</td><td>High</td><td>Polar compounds, glycosides, saponins, polysaccharides</td><td>Ethanol and water mixtures mimic traditional preparations and are low toxicity.</td></tr>
+</tbody></table></div>
+<div class="note"><b>Not all at once</b>You do not use every solvent for every plant. The choice depends on the plant, the compound class targeted and the chromatography strategy.</div>
+</section>
+
+<section id="extraction">
+<h2>3. Extraction methods</h2>
+<p class="lede">Extraction moves compounds from the plant matrix into a solvent. Choose a method based on the stability of the compounds, the scale and the equipment available.</p>
+<div class="scroll"><table>
+<thead><tr><th>Method</th><th>How it works</th><th>Strengths</th><th>Limits</th></tr></thead>
+<tbody>
+<tr><td>Maceration</td><td>Soak powder in solvent at room temperature for 24–72 h, with occasional shaking. Filter, then repeat 2–3 times with fresh solvent.</td><td>Simple, cheap, no heat, so good for labile compounds</td><td>Slow, uses much solvent, may be incomplete</td></tr>
+<tr><td>Percolation</td><td>Solvent drips slowly through packed powder in a column and is collected from the bottom.</td><td>More complete than maceration</td><td>Needs careful packing; uses a lot of solvent</td></tr>
+<tr><td>Soxhlet extraction</td><td>Fresh warm solvent repeatedly cycles through the powder in a thimble.</td><td>Efficient, uses less solvent</td><td>Prolonged heat can degrade thermolabile compounds</td></tr>
+<tr><td>Decoction and infusion</td><td>Boil the plant in water (decoction) or steep in hot water (infusion).</td><td>Matches traditional use; water only</td><td>Extracts mostly polar compounds; spoils quickly</td></tr>
+<tr><td>Ultrasound-assisted (UAE)</td><td>Ultrasound disrupts cell walls in a bath or probe, for 15–60 min.</td><td>Fast, lower temperature, good yield</td><td>Equipment needed; heat can build up</td></tr>
+<tr><td>Microwave-assisted (MAE)</td><td>Microwaves heat solvent and plant moisture rapidly.</td><td>Very fast, low solvent use</td><td>Equipment needed; not for heat-labile compounds</td></tr>
+<tr><td>Supercritical CO₂ (SFE)</td><td>Supercritical CO₂, often with a modifier such as ethanol, extracts compounds.</td><td>Solvent-free product, selective</td><td>Expensive equipment</td></tr>
+<tr><td>Steam or hydro-distillation</td><td>Steam carries volatile oils out of the plant, then condenses.</td><td>Standard for essential oils</td><td>Only for volatile compounds</td></tr>
+</tbody></table></div>
+
+<div class="panel">
+<h3>Typical maceration procedure</h3>
+<ol>
+<li>Weigh the dry powder (for example 100 g to 1 kg).</li>
+<li>Place in a clean flask or container and cover with solvent, typically 5–10 times the powder weight in volume (for example 1 L per 100–200 g).</li>
+<li>Seal and leave 24–72 h at room temperature, shaking occasionally.</li>
+<li>Filter through cloth or filter paper. Keep the filtrate.</li>
+<li>Re-extract the residue (marc) two or more times with fresh solvent and pool the filtrates.</li>
+<li>Concentrate under reduced pressure on a rotary evaporator (water bath around 40 °C) until a syrupy or solid residue remains.</li>
+<li>Dry completely (desiccator, vacuum or freeze-drier), weigh, and calculate % yield.</li>
+</ol>
+<div class="eq">% yield = (mass of dry crude extract ÷ mass of dry plant powder) × 100</div>
+</div>
+
+<div class="grid">
+<div class="panel">
+<h3>Sequential extraction</h3>
+<p>The same powder is extracted with solvents of increasing polarity, for example hexane, then DCM, then ethyl acetate, then methanol. Each extract holds a chemically different group of compounds, and fractionation is built into the extraction.</p>
+</div>
+<div class="panel">
+<h3>Single-solvent extraction</h3>
+<p>Extract once with methanol (or ethanol) to capture a broad range, then partition the crude extract between solvents. Faster, and common when screening many plants.</p>
+</div>
+</div>
+</section>
+
+<section id="fractionation">
+<h2>4. Fractionation of the crude extract</h2>
+<div class="panel">
+<h3>Liquid–liquid partitioning</h3>
+<ol>
+<li>Dissolve or suspend the crude methanol extract in water, or in methanol–water (for example 9:1).</li>
+<li>Transfer to a separatory funnel and add an immiscible solvent, starting with the least polar (hexane or petroleum ether).</li>
+<li>Shake gently with venting, let the layers separate, and collect the organic layer. Repeat 3 times.</li>
+<li>Repeat with the next solvent in order of polarity (DCM or chloroform, then ethyl acetate, then butanol if wanted).</li>
+<li>Evaporate each solvent layer separately. The leftover aqueous layer is the most polar fraction.</li>
+</ol>
+<p>This gives, for example, a hexane fraction (fats, waxes, non-polar terpenes), a DCM or chloroform fraction (moderately non-polar compounds), an ethyl acetate fraction (phenolics and flavonoids) and an aqueous fraction (very polar compounds and sugars).</p>
+</div>
+<div class="panel">
+<h3>Defatting</h3>
+<p>Leaf and seed material often holds large amounts of chlorophyll, fats and waxes that foul columns. A preliminary hexane or petroleum ether wash removes much of this before the main extraction.</p>
+</div>
+</section>
+
+<section id="tlc">
+<h2>5. Thin-layer chromatography (TLC)</h2>
+<p class="lede">TLC is the everyday tool for seeing what is in a sample. It uses silica on a flat support, with a solvent that moves up by capillary action.</p>
+<div class="grid">
+<div class="panel">
+<h3>What TLC is used for</h3>
+<ul>
+<li>Counting roughly how many compounds an extract or fraction holds</li>
+<li>Comparing fractions to see if they match</li>
+<li>Choosing the solvent system for a column</li>
+<li>Monitoring column fractions</li>
+<li>Checking the purity of an isolated compound</li>
+</ul>
+</div>
+<div class="panel">
+<h3>Silica powder vs ready-made plates</h3>
+<ul>
+<li><b>TLC-grade silica powder</b> is used to coat plates in the lab (and sometimes for preparative plates).</li>
+<li><b>Ready-made plates</b> (silica on aluminium, glass or plastic) are convenient and more uniform for routine work.</li>
+<li>Confirm the exact intended use against the procurement specification.</li>
+</ul>
+</div>
+</div>
+
+<div class="panel">
+<h3>Running a TLC plate</h3>
+<ol>
+<li>Draw a faint pencil line about 1 cm from the bottom. Never use pen, as the ink will run.</li>
+<li>Dissolve a little sample in a volatile solvent and spot it on the line with a capillary. Keep spots small. Let them dry.</li>
+<li>Pour solvent into a chamber to about 0.5 cm depth (below the spot line). Line with filter paper and close the lid so the air saturates.</li>
+<li>Place the plate in the chamber and let the solvent rise until about 1 cm from the top. Remove and mark the solvent front immediately.</li>
+<li>Dry the plate and visualise (see below).</li>
+</ol>
+<div class="eq">Rf = distance travelled by the compound ÷ distance travelled by the solvent front</div>
+<p>For example, a spot that moves 3.6 cm when the solvent front has moved 7.2 cm has an Rf of 0.50. Strongly retained compounds have a low Rf; weakly retained, mobile ones have a high Rf. Aim for Rf values between about 0.2 and 0.5 for the compounds you want to separate on a column.</p>
+</div>
+
+<div class="scroll"><table>
+<thead><tr><th>Sample type</th><th>Common solvent systems (v/v)</th></tr></thead>
+<tbody>
+<tr><td>Non-polar (terpenes, fats)</td><td>Hexane : ethyl acetate (9:1 to 7:3), or hexane : DCM</td></tr>
+<tr><td>Medium polarity (many terpenoids, coumarins)</td><td>Hexane : ethyl acetate (1:1), or DCM : ethyl acetate</td></tr>
+<tr><td>Phenolics and flavonoids</td><td>Ethyl acetate : methanol : water, or toluene : ethyl acetate : formic acid</td></tr>
+<tr><td>Polar compounds, glycosides</td><td>DCM : methanol (9:1 to 7:3), or butanol : acetic acid : water</td></tr>
+<tr><td>Alkaloids</td><td>DCM : methanol (95:5) with a few drops of ammonia or diethylamine to reduce tailing</td></tr>
+</tbody></table></div>
+<p>If spots stay at the bottom, make the solvent more polar. If they run to the top, make it less polar.</p>
+
+<div class="scroll"><table>
+<thead><tr><th>Visualisation</th><th>Detects</th></tr></thead>
+<tbody>
+<tr><td>UV light at 254 nm and 365 nm</td><td>Compounds with conjugated or aromatic systems. Non-destructive, so always done first.</td></tr>
+<tr><td>Vanillin–sulfuric acid or anisaldehyde–sulfuric acid, then heat</td><td>Terpenoids, steroids and many other compounds, in a range of colours</td></tr>
+<tr><td>Dragendorff's reagent</td><td>Alkaloids (orange or brown spots)</td></tr>
+<tr><td>Natural products reagent (NP/PEG)</td><td>Flavonoids (fluorescent under UV)</td></tr>
+<tr><td>Ferric chloride</td><td>Phenolics and tannins</td></tr>
+<tr><td>DPPH spray</td><td>Antioxidants (yellow spots on a purple background)</td></tr>
+<tr><td>Iodine vapour</td><td>General, reversible</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="column">
+<h2>6. Column chromatography on silica</h2>
+<p class="lede">The same polarity logic as TLC, scaled up. Silica is the stationary phase. Non-polar compounds move quickly and polar ones are held back.</p>
+<div class="panel">
+<h3>Procedure</h3>
+<ol>
+<li><b>Choose the solvent system.</b> Use TLC to find a mixture where the target compounds have Rf about 0.2–0.4. Start the column with a weaker (less polar) solvent than that.</li>
+<li><b>Select the amount of silica.</b> A common rule is 30 to 100 g silica per 1 g sample (more for difficult separations). Use a column long and narrow enough for the separation.</li>
+<li><b>Pack the column.</b> Wet packing is most reliable: make a slurry of silica in the starting solvent, pour it in, tap to remove air, and let it settle. Never let the silica run dry or crack.</li>
+<li><b>Load the sample.</b> Either dissolve it in a minimum of solvent and apply a narrow band, or dry-load by adsorbing it onto a little silica, evaporating the solvent, and adding the powder to the top. Add a thin layer of sand to protect the surface.</li>
+<li><b>Elute.</b> Run isocratically (one solvent mixture) or by gradient, increasing polarity in steps, for example hexane, then hexane : ethyl acetate (9:1, 8:2, 1:1), then ethyl acetate, then ethyl acetate : methanol.</li>
+<li><b>Collect fractions</b> of consistent volume in numbered tubes or flasks.</li>
+</ol>
+</div>
+<div class="panel">
+<h3>Monitoring and combining fractions</h3>
+<p>Spot every few fractions on one TLC plate alongside the starting material. Fractions with the same spot pattern are pooled and evaporated. Label everything clearly, because mistakes here are hard to undo.</p>
+</div>
+<div class="grid">
+<div class="panel"><h3>Gravity column</h3><p>Simple and cheap. Solvent drips through by gravity. Slower, but ideal for large amounts and teaching labs.</p></div>
+<div class="panel"><h3>Flash column</h3><p>Gentle air or nitrogen pressure speeds the flow, giving faster and often sharper separations. Pre-packed cartridge systems are also available.</p></div>
+<div class="panel"><h3>Vacuum liquid chromatography (VLC)</h3><p>A quick first split of a large crude extract into several polarity fractions under vacuum, before finer columns.</p></div>
+</div>
+</section>
+
+<section id="purify">
+<h2>7. Further purification</h2>
+<div class="scroll"><table>
+<thead><tr><th>Technique</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td>Sephadex LH-20 (size exclusion and adsorption)</td><td>Gentle clean-up, often in methanol. Good for removing chlorophyll and tannins and for separating flavonoids and phenolics.</td></tr>
+<tr><td>Preparative TLC</td><td>Apply sample as a band on a thick plate, develop, scrape off the band of interest and extract it from the silica. Good for small amounts.</td></tr>
+<tr><td>Reversed-phase (C18) chromatography</td><td>Polar compounds, with water–methanol or water–acetonitrile mixtures.</td></tr>
+<tr><td>Preparative or semi-preparative HPLC</td><td>Final polishing to high purity, and separation of closely related compounds.</td></tr>
+<tr><td>Recrystallisation</td><td>Dissolve in a hot solvent and cool slowly. Pure compounds crystallise and impurities stay in solution.</td></tr>
+</tbody></table></div>
+<p><b>Checking purity:</b> a single spot in several different TLC solvent systems, a sharp melting point (for crystals), a single peak by HPLC, and clean NMR spectra all support purity.</p>
+</section>
+
+<section id="id">
+<h2>8. Identifying the compound</h2>
+<div class="scroll"><table>
+<thead><tr><th>Technique</th><th>What it tells you</th></tr></thead>
+<tbody>
+<tr><td>NMR (¹H, ¹³C, 2D such as COSY, HSQC, HMBC)</td><td>The carbon–hydrogen framework and how atoms are connected. The main tool for structure elucidation.</td></tr>
+<tr><td>Mass spectrometry (LC-MS, LC-MS/MS, HRMS)</td><td>Molecular weight, molecular formula and fragmentation patterns.</td></tr>
+<tr><td>GC-MS</td><td>Volatile and semi-volatile compounds such as essential oil components. Library matching is possible.</td></tr>
+<tr><td>UV-Vis</td><td>Conjugated systems and chromophore type (useful for flavonoids).</td></tr>
+<tr><td>FTIR</td><td>Functional groups such as OH, C=O and aromatic rings.</td></tr>
+<tr><td>Optical rotation, X-ray crystallography</td><td>Stereochemistry and absolute configuration.</td></tr>
+</tbody></table></div>
+<p>Compare data with the literature and databases, and record whether the compound is known or new.</p>
+</section>
+
+<section id="classes">
+<h2>9. Tips by compound class</h2>
+<div class="grid">
+<div class="panel"><h3>Alkaloids</h3><p>Basic nitrogen compounds. A classic acid–base method: extract with dilute acid (they dissolve as salts), wash with a non-polar solvent to remove neutrals, make the aqueous layer basic with ammonia, then extract the free bases into DCM or chloroform.</p></div>
+<div class="panel"><h3>Flavonoids and phenolics</h3><p>Aglycones go into ethyl acetate; glycosides stay more polar (methanol, aqueous). Sephadex LH-20 and C18 are useful. They oxidise easily, so avoid prolonged heat and light.</p></div>
+<div class="panel"><h3>Terpenoids and sterols</h3><p>Found in hexane, DCM and ethyl acetate fractions. Essential oils come from hydro-distillation. Silica columns with hexane and ethyl acetate gradients work well.</p></div>
+<div class="panel"><h3>Saponins and glycosides</h3><p>Polar, often in butanol and aqueous fractions. They foam when shaken. Defat first, then use methanol or ethanol–water, and often reversed-phase or Diaion/HP-20 resin.</p></div>
+<div class="panel"><h3>Tannins</h3><p>Large polyphenols soluble in water and aqueous acetone. Sephadex LH-20 is the usual method.</p></div>
+<div class="panel"><h3>Coumarins and quinones</h3><p>Medium polarity, usually in DCM and ethyl acetate fractions. Many fluoresce under UV on TLC, which helps tracking.</p></div>
+</div>
+</section>
+
+<section id="safety">
+<h2>10. Safety, quality and record keeping</h2>
+<div class="warn"><b>Solvent hazards</b>Hexane, petroleum ether and diethyl ether are highly flammable. Ether can form explosive peroxides. DCM and chloroform are toxic, and chloroform is a suspected carcinogen. Methanol is toxic by ingestion, skin contact and inhalation. Work in a fume hood, away from ignition sources, and never heat solvents with an open flame.</div>
+<div class="grid">
+<div class="panel"><h3>Protection</h3><ul><li>Lab coat, safety glasses and suitable gloves (nitrile is not suitable for all solvents, so check compatibility)</li><li>Good ventilation or fume hood</li><li>Silica dust is hazardous when inhaled: avoid creating dust, and wear a mask when handling dry powder</li></ul></div>
+<div class="panel"><h3>Waste</h3><ul><li>Keep halogenated (DCM, chloroform) and non-halogenated waste separate</li><li>Label containers and follow institutional disposal rules</li><li>Recover solvents by rotary evaporation where permitted</li></ul></div>
+<div class="panel"><h3>Records</h3><ul><li>Keep a lab notebook: plant details, masses, solvent volumes, dates, yields</li><li>Label every flask, vial and TLC plate (and photograph plates)</li><li>Store extracts cold, dry and dark, with a clear sample ID</li><li>Handle unknown plant extracts as potentially toxic</li></ul></div>
+</div>
+</section>
+
+<section id="trouble">
+<h2>11. Troubleshooting</h2>
+<div class="scroll"><table>
+<thead><tr><th>Problem</th><th>Likely cause</th><th>What to try</th></tr></thead>
+<tbody>
+<tr><td>Low extract yield</td><td>Powder too coarse, too little solvent or time, wrong solvent</td><td>Grind finer, repeat extraction, use ultrasound, try a more suitable solvent</td></tr>
+<tr><td>Spots streak or tail on TLC</td><td>Sample too concentrated, acidic or basic compounds, too polar a spotting solvent</td><td>Dilute the sample; add a little acid (acetic or formic) or base (ammonia or diethylamine) to the solvent</td></tr>
+<tr><td>Spots all at the baseline or all at the front</td><td>Solvent too non-polar or too polar</td><td>Increase or decrease polarity</td></tr>
+<tr><td>Poor separation on column</td><td>Overloaded, column poorly packed, solvent too strong, flow too fast</td><td>Use more silica, repack, start with a weaker solvent, use a shallower gradient</td></tr>
+<tr><td>Cracks or air bubbles in silica bed</td><td>Column ran dry or packed unevenly</td><td>Repack and keep solvent above the silica at all times</td></tr>
+<tr><td>Compound seems to disappear on silica</td><td>Decomposes on acidic silica or sticks irreversibly</td><td>Test stability on a TLC plate; try neutral alumina, deactivated silica, or Sephadex or C18</td></tr>
+<tr><td>Emulsion in separatory funnel</td><td>Saponins or other surfactants, shaking too hard</td><td>Swirl gently, add brine, filter through celite, or wait</td></tr>
+<tr><td>Extract is sticky or gummy and will not dry</td><td>Sugars, fats or residual solvent</td><td>Defat, freeze-dry, or dry under high vacuum</td></tr>
+</tbody></table></div>
+</section>
+
+</main>
+
+<footer><div class="wrap">This guide gives general laboratory practice for educational and research use. Follow your institution's safety procedures and local regulations, and optimise every step for your specific plant and target compounds.</div></footer>
+</body>
+</html>
+

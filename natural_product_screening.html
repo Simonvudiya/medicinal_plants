@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Natural Product Screening and Collaborations Report</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#eef2ee;--surface:#fbfcfb;--ink:#17261f;--muted:#55665d;--line:#cbd6cf;--accent:#1f6b52;--accent-soft:#dcebe3;--warn:#8a5a00;--warn-soft:#f6ecd2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a16;--surface:#18241f;--ink:#e6efe9;--muted:#9fb2a8;--line:#2d4038;--accent:#6fcba5;--accent-soft:#1d3a2f;--warn:#e8c46a;--warn-soft:#3a3118}}
+:root[data-theme="dark"]{--bg:#111a16;--surface:#18241f;--ink:#e6efe9;--muted:#9fb2a8;--line:#2d4038;--accent:#6fcba5;--accent-soft:#1d3a2f;--warn:#e8c46a;--warn-soft:#3a3118}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 36px;border-bottom:3px solid var(--accent)}
+.flag{display:inline-block;background:var(--warn-soft);color:var(--warn);font-weight:600;font-size:.8rem;padding:3px 10px;border-radius:3px;margin-bottom:16px}
+h1{font:700 clamp(1.9rem,5vw,3.1rem)/1.12 "Source Serif 4",Georgia,serif;margin:0 0 14px;max-width:20ch}
+header p{color:var(--muted);max-width:62ch;margin:0}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+nav .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:6px;padding-bottom:6px}
+nav a{white-space:nowrap;color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:4px;font-size:.92rem}
+nav a:hover,nav a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
+section{padding:44px 0 8px}
+h2{font:700 1.7rem/1.2 "Source Serif 4",Georgia,serif;margin:0 0 6px}
+h3{font:600 1.15rem/1.3 "Source Serif 4",Georgia,serif;margin:0 0 6px}
+.lede{color:var(--muted);margin:0 0 22px;max-width:70ch}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);padding:12px 14px}
+.stat b{display:block;font:700 1.7rem/1.1 "Source Serif 4",Georgia,serif;color:var(--accent)}
+.stat span{font-size:.85rem;color:var(--muted)}
+.panel{background:var(--surface);border:1px solid var(--line);padding:18px 20px;margin:0 0 16px}
+.panel p{margin:.4em 0}
+.flow{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;padding:0;list-style:none;counter-reset:s}
+.flow li{counter-increment:s;flex:1 1 170px;background:var(--accent-soft);padding:10px 12px;font-size:.9rem;border-radius:3px}
+.flow li::before{content:counter(s) ". ";font-weight:600;color:var(--accent)}
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--surface);margin:0 0 16px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.93rem}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--accent-soft);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+em.sp{font-style:italic}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.tag{display:inline-block;font-size:.78rem;font-weight:600;padding:1px 8px;border-radius:3px;background:var(--accent-soft);color:var(--accent)}
+.tag.neg{background:var(--warn-soft);color:var(--warn)}
+.note{font-size:.88rem;color:var(--muted);border-left:3px solid var(--warn);padding:4px 12px;margin:12px 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0;padding:0;list-style:none}
+.chips li{border:1px solid var(--line);padding:3px 10px;border-radius:99px;font-size:.88rem;font-style:italic}
+footer{margin-top:48px;padding:20px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+@media (max-width:560px){header{padding-top:36px}.wrap{padding:0 14px}}
+</style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-link">Gallery</a>
+        <a href="overview.html" class="nav-link">Overview</a>
+        <a href="introduction.html" class="nav-link">Introduction</a>
+        <a href="remedies.html" class="nav-link">Remedies</a>
+        <a href="directory.html" class="nav-link">Directory</a>
+        <a href="inform_data.html" class="nav-link">Data</a>
+        <a href="compunds.html" class="nav-link">Compounds</a>
+        <a href="natural_product_screening.html" class="nav-link active">Screening</a>
+        <a href="extraction_compounds.html" class="nav-link">Extraction</a>
+    </nav>
+
+<header><div class="wrap">
+<span class="flag">Confidential</span>
+<h1>Natural product screening and collaborative research</h1>
+<p>Summary of the Strathclyde Institute for Drug Research screening programme to the end of 2004, with a report on collaborative projects carried out through KNAS by Prof. Jacob O. Midiwo.</p>
+</div></header>
+
+<nav aria-label="Sections"><div class="wrap">
+<a href="#programme">Programme</a><a href="#assays">Assays</a><a href="#results">Results</a><a href="#collab">Collaborations</a>
+</div></nav>
+
+<main class="wrap">
+<section id="programme">
+<h2>Screening programme</h2>
+<p class="lede">The Strathclyde natural product drug discovery group has focused on broad preliminary screening across many assays rather than follow-up chemistry.</p>
+<div class="stats">
+<div class="stat"><b>22</b><span>assays run on most samples</span></div>
+<div class="stat"><b>6</b><span>more assays in progress</span></div>
+<div class="stat"><b>3</b><span>standardised, ready when resources allow</span></div>
+<div class="stat"><b>80</b><span>samples per 96-well plate</span></div>
+</div>
+<div class="panel">
+<h3>How samples are processed</h3>
+<p>All samples are dissolved in DMSO at 50 mg/ml and added to 96-well plates. Dilutions from these "mother plates" give a suitable screening concentration. The assays are mostly cell-based, a mix of binding and functional assays covering several therapeutic targets.</p>
+<ol class="flow">
+<li>Preliminary screen at a single concentration per extract</li>
+<li>Retest original sample and several lower concentrations</li>
+<li>Full dose-response curves for confirmed hits</li>
+<li>Fractionation and bioassay-guided isolation of active compounds</li>
+</ol>
+</div>
+</section>
+
+<section id="assays">
+<h2>Assays and therapeutic targets</h2>
+<p class="lede">Thirteen assay areas are described in the programme summary.</p>
+<div class="scroll"><table>
+<thead><tr><th>Assay</th><th>Purpose and method</th></tr></thead>
+<tbody>
+<tr><td>Tumour necrosis factor α (TNF)</td><td>Inflammatory cytokine; blocking it is expected to modify rheumatoid arthritis (as with Remicade, Humira, Enbrel). Cell-based assay measures the ability of extracts to prevent TNF-induced death of sensitised L929 fibroblasts.</td></tr>
+<tr><td>Nuclear factor KB (NFKB)</td><td>Transcription factor activated by inflammatory signals. Reporter-gene assay detects interference with NFKB activation (with University of St Andrews).</td></tr>
+<tr><td>Cell adhesion</td><td>Blocking adhesion of neutrophils and macrophages to blood-vessel endothelium may help asthma, arthritis and possibly cancer spread. Proprietary assays developed; pilot-stage screening only.</td></tr>
+<tr><td>Cell proliferation: psoriasis</td><td>Looks for selective inhibitors of proliferation in skin keratinocytes (NCTC cell line).</td></tr>
+<tr><td>Cell proliferation: cancer</td><td>Cytotoxicity screening on Jurkat lymphoma, TE671 neuroblastoma and A375 melanoma cells. Specificity checked against normal mouse (L929) and human (HS-27) fibroblasts.</td></tr>
+<tr><td>Anti-bacterial replication</td><td>High-throughput assay on deadbox protein A, a bacteria-specific enzyme (with University of Dundee). Conventional cultures: <em class="sp">Staphylococcus aureus</em>, <em class="sp">Escherichia coli</em>, <em class="sp">M. aurum</em>. Biofilm-prevention assay under development.</td></tr>
+<tr><td>Anti-fungal</td><td>A dermatophyte and a <em class="sp">Candida</em> strain used industrially for primary screening (with University of Aberdeen).</td></tr>
+<tr><td>Trypanothione reductase</td><td>Cloned trypanosomal enzyme, absent in mammals, targeting sleeping sickness and Chagas disease (with University of Dundee). Pilot-stage only.</td></tr>
+<tr><td>Protease inhibitors</td><td>Five enzymes: chymotrypsin (pancreatitis), tryptase (inflammation), proteinase K, subtilisin A (possible antibacterial target) and a novel fungal protease.</td></tr>
+<tr><td>Anticholinesterase</td><td>Acetylcholinesterase and butyrylcholinesterase inhibitors for Alzheimer's disease, using standard biochemical assays.</td></tr>
+<tr><td>Muscarinic M4 receptors</td><td>M4 activators in the CNS are expected to be powerful analgesics. Radioligand binding on human cloned M4 receptors.</td></tr>
+<tr><td>Anti-oxidant</td><td>Free radical scavenging measured by the DPPH method.</td></tr>
+<tr><td>Anti-diabetic</td><td>Glucose uptake in adipocytes and skeletal muscle cells; inhibition of α-glucosidase, PTP-1B phosphatases and GPP-IV (as written in source; the GLP-metabolising enzyme). Screening still underway.</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="results">
+<h2>Results to date</h2>
+<p class="lede">Results available in the supplied pages, by assay.</p>
+
+<div class="panel">
+<h3>Anti-bacterial: Kenyan extracts <span class="tag">54 extracts retained</span></h3>
+<p>Minimum Inhibitory Concentrations (MICs) were established. 54 extracts remain for investigation because their MICs are 62.5 µg/ml or less and they showed no major cytotoxic effect on L929 cells. Eight of the active extracts are from Kenya:</p>
+<div class="scroll"><table>
+<thead><tr><th>Plant</th><th>SIDR no.</th><th>MIC (µg/ml)</th><th>Also active vs <em class="sp">S. aureus</em></th></tr></thead>
+<tbody>
+<tr><td><em class="sp">Paramacrolobium coeruleum</em></td><td class="num">2299</td><td class="num">15.6</td><td></td></tr>
+<tr><td><em class="sp">Commiphora africana</em></td><td class="num">1574</td><td class="num">31.2</td><td></td></tr>
+<tr><td><em class="sp">Garcinia livingstonei</em></td><td class="num">1920</td><td class="num">62.5</td><td>Yes</td></tr>
+<tr><td><em class="sp">Juniperus procera</em></td><td class="num">1604</td><td class="num">62.5</td><td>Yes</td></tr>
+<tr><td><em class="sp">Melia volkensii</em></td><td class="num">2374</td><td class="num">62.5</td><td></td></tr>
+<tr><td><em class="sp">Ophrypetalum odoratum</em></td><td class="num">3757</td><td class="num">62.5</td><td>Yes</td></tr>
+<tr><td><em class="sp">Senecio keniensis</em></td><td class="num">3170</td><td class="num">62.5</td><td></td></tr>
+<tr><td><em class="sp">Uvariodendron anisatum</em></td><td class="num">2176</td><td class="num">62.5</td><td></td></tr>
+</tbody></table></div>
+</div>
+
+<div class="grid">
+<div class="panel">
+<h3>Anti-fungal <span class="tag neg">Not promising</span></h3>
+<p>3,280 extracts were tested against <em class="sp">Candida kefyr</em> and <em class="sp">Trichophyton rubrum</em>. Extracts were diluted 1:100 (5 mg/ml) and incubated at 35 °C for 48 h (<em class="sp">C. kefyr</em>) or 30 °C for 5 days (<em class="sp">T. rubrum</em>). A hit was growth ≤35% of control, or more than 2 standard deviations below the mean.</p>
+<p>Many extracts appeared to inhibit <em class="sp">C. kefyr</em>, far fewer <em class="sp">T. rubrum</em>. At this high concentration, colour interfering with OD readings and non-specific effects can mimic inhibition.</p>
+<p>In secondary screening most hits did not reproduce. Of nine that did, only 3 were active at 1:1000 (vs <em class="sp">C. kefyr</em>) and one was active against both fungi, at 1:100 only. Follow-up with fractions is being considered.</p>
+</div>
+
+<div class="panel">
+<h3>Protease inhibitors: chymotrypsin</h3>
+<p>5,121 samples were tested at 100 µg/ml. 18 samples with ≥60% inhibition were re-examined for concentration dependence. 4 were active and will be studied further; none is from Kenya.</p>
+</div>
+
+<div class="panel">
+<h3>Muscarinic M4 receptors <span class="tag neg">Unconfirmed</span></h3>
+<p>4,801 samples were tested at 100 µg/ml in a radioligand binding assay with ³H-N-methylscopolamine. 190 appeared active (≥60% inhibition of binding). These activities are yet to be confirmed.</p>
+</div>
+
+<div class="panel">
+<h3>Anti-oxidant (partial excerpt)</h3>
+<p>Two active samples are from Kenya: <em class="sp">Psychotria riparia</em> (SIDR 1791) and <em class="sp">Macaranga schweinfurthii</em> (SIDR 3255). For SIDR 1791 binding fell as concentration rose, with an IC50 of 3.7 µg/ml.</p>
+</div>
+</div>
+<p class="note">The source pages are excerpts. Results for several assays (for example TNF, NFKB, cancer and anti-S. aureus) are not included in the text supplied.</p>
+</section>
+
+<section id="collab">
+<h2>Collaborative work through KNAS</h2>
+<p class="lede">Report by Prof. Jacob O. Midiwo. Five parallel projects are on-going with companies or institutions abroad under agreements.</p>
+<div class="scroll"><table>
+<thead><tr><th>Partner</th><th>Country</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Analyticon AG</td><td>Germany</td><td>Compound isolation for company bioassays; 390 compounds isolated</td></tr>
+<tr><td>University of Strathclyde</td><td>Scotland, UK</td><td>Long-running; developing principles from plant extracts for modern diseases</td></tr>
+<tr><td>University of Mississippi</td><td>USA</td><td>Started last year; five-year agreement; awaiting preliminary report</td></tr>
+<tr><td>L'Oréal</td><td>France</td><td>Anti-skin-ageing tests; nine plants active and being followed</td></tr>
+<tr><td>Malagasy Research Institute (IMRA)</td><td>Madagascar</td><td>Just started; first batch of samples being structure-determined</td></tr>
+</tbody></table></div>
+
+<div class="grid">
+<div class="panel">
+<h3>Analyticon AG</h3>
+<p>The project isolates compounds that are distributed to companies for bioassay tests. 390 compounds have been isolated from extracts and characterised. They are being offered to companies, with some success. The company's report is enclosed.</p>
+</div>
+<div class="panel">
+<h3>University of Strathclyde</h3>
+<p>Extracts have shown activity as TNFα inhibitors, NFKB activation inhibitors, psoriasis-spread inhibitors, and in anti-cancer, anti-bacterial, anti-fungal, protease inhibitor, anti-cholinesterase and anti-oxidant activities. These hits are background for further study of the plants. The detailed Strathclyde report is enclosed.</p>
+</div>
+<div class="panel">
+<h3>University of Mississippi</h3>
+<p>The collaboration began last year and continues for five years under the agreement. A preliminary report has been requested and an update will follow on receipt.</p>
+</div>
+<div class="panel">
+<h3>L'Oréal: anti-skin-ageing plants</h3>
+<p>Nine plants have shown activity since the project began and are being followed. A letter from the company, received last year, is referenced.</p>
+<ul class="chips">
+<li>Keetia venosa</li><li>Bivinia jalbertii</li><li>Combretum scumanii</li><li>Hymenocardia acida</li><li>Cordia gharaf</li><li>Terminalia spinosa</li><li>Chamaecrista mimosoides</li><li>Sorindeia madagascariensis</li><li>Psiadia punctulata</li>
+</ul>
+</div>
+</div>
+<p class="note">The source lists "five" projects but numbers six entries, with Analyticon AG appearing twice in the list and the numbering restarting. This page follows the five distinct partners.</p>
+</section>
+</main>
+
+<footer><div class="wrap">Confidential. Compiled from the supplied document excerpts.</div></footer>
+</body>
+</html>
+
